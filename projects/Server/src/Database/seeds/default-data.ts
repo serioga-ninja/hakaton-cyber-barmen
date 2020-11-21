@@ -181,6 +181,55 @@ export class DefaultData {
       },
 
 
+      {
+        drink: vermout,
+        cocktail: biancoTonic,
+        amount: 100
+      },
+      {
+        drink: tonik,
+        cocktail: biancoTonic,
+        amount: 100
+      },
+
+
+      {
+        drink: vodka,
+        cocktail: dateOnTheBich,
+        amount: 100
+      },
+      {
+        drink: tonik,
+        cocktail: dateOnTheBich,
+        amount: 100
+      },
+      {
+        drink: appleJuice,
+        cocktail: dateOnTheBich,
+        amount: 100
+      },
+      {
+        drink: grenadine,
+        cocktail: dateOnTheBich,
+        amount: 100
+      },
+
+
+      {
+        drink: gin,
+        cocktail: untitledRealm,
+        amount: 100
+      },
+      {
+        drink: vodka,
+        cocktail: untitledRealm,
+        amount: 100
+      },
+      {
+        drink: appleJuice,
+        cocktail: untitledRealm,
+        amount: 100
+      },
 
 
     ]);
