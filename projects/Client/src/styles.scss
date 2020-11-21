@@ -40,3 +40,20 @@ body {
     margin: 0 auto;
     position: relative;
 }
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 150px;
+    }
+
+    h1 {
+        color: #eacf77;
+        font-size: 55px;
+        text-shadow: 5px 5px 10px rgba(255, 255, 255, .2);
+        margin-left: 25px;
+    }
+}

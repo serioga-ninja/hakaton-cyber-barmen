@@ -5,9 +5,9 @@ import { ICocktail, IDrink, ILoginBody } from './models';
 
 const apiUrls = {
   login: '',
-  cocktails: '/api/cocktails',
-  drinks: '/api/drinks',
-  cookCocktail: '',
+  cocktails: 'http://localhost:3000/api/cocktails',
+  drinks: 'http://localhost:3000/api/drinks',
+  cookCocktail: 'http://localhost:3000/api/order'
 }
 
 @Injectable({
@@ -28,37 +28,14 @@ export class ApiService {
 
   // TODO
   cookCocktail(cocktail: ICocktail) {
-    return this.httpClient.get(apiUrls.cookCocktail + '/' + cocktail.id);
+    console.log(cocktail);
+    
+    return this.httpClient.post(apiUrls.cookCocktail, {cocktail: cocktail});
   }
 
   getCocktails(): Observable<ICocktail[]> {
-    const list = [];
-    for (let i = 1; i < 10;i++) {
-      list.push({
-        id: i,
-        name: `Cocktail ${i}`,
-        components: [
-          {
-            id: 0,
-            amount: Math.floor(Math.random() * 10),
-            drink: {
-              id: 0,
-              name: 'Drink ' + 0,
-            }
-          },
-          {
-            id: i,
-            amount: Math.floor(Math.random() * 10),
-            drink: {
-              id: i,
-              name: 'Drink ' + i,
-            }
-          }
-        ]
-      });
-    }
-    return of(list);
-    // return this.httpClient.get<ICocktail[]>(apiUrls.cocktails);
+    
+    return this.httpClient.get<ICocktail[]>(apiUrls.cocktails);
   }
 
   getCocktail(cocktailId: string) {

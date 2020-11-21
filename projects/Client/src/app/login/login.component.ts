@@ -24,7 +24,16 @@ export class LoginComponent implements OnInit {
       password: this.phase
     }
     this.api.login(loginBody).subscribe(data => {
-      this.router.navigateByUrl('cocktails');
+      switch (this.phase) {
+        case 'admin':
+          this.router.navigateByUrl('admin');
+          break;
+        case 'user':
+          this.router.navigateByUrl('cocktails');
+          break;
+        default:
+          break;
+      }
     });
   }
 }

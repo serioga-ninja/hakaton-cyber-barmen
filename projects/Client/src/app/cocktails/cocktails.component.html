@@ -1,14 +1,15 @@
-<h1>Cocktails</h1>
+<div class="logo">
+  <img src="../../assets/images/logo.png" alt="Logo">
+  <h1>Cocktails</h1>
+</div>
 
-<ul>
-  <li *ngFor="let i of list">
-    <div (click)="selectCocktail(i)">
-      <div class="name">{{i.name}}</div>
+<ul class="cocktail">
+  <li *ngFor="let i of list" class="cocktail__item" (click)="selectCocktail(i)">
+      <span class="name">{{i.name}}</span>
       <ul class="components">
         <li *ngFor="let component of i.components">
           {{component.drink.name}} - {{component.amount}}
         </li>
       </ul>
-    </div>
   </li>
 </ul>
