@@ -3,17 +3,23 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ApiService } from './api.service';
-import { AppRoutingModule } from './app-routing,module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { DrinksComponent } from './drinks/drinks.component';
+import { DrinkComponent } from './drink/drink.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CocktailsComponent
+    CocktailsComponent,
+    AdminPageComponent,
+    DrinksComponent,
+    DrinkComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ export class CocktailsComponent implements OnInit {
   }
 
   selectCocktail (item: ICocktail) {
-    console.log(item);
-    this.api.selectCocktail(item);
+    console.log('Cook Cocktail', item);
+    this.api.cookCocktail(item);
   }
 }
