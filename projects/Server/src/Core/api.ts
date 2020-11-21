@@ -45,7 +45,7 @@ export abstract class Api<T = any> {
   protected async create(request: ICreateRequest<T>, response: IResponse) {
     const res = await dbConnection
       .getRepository(this.entity)
-      .create(request.body);
+      .save(request.body);
 
     response.json(res);
   }
