@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Cocktail } from './Cocktail';
 import { Drink } from './Drink';
 
@@ -10,11 +10,9 @@ export class Component {
   @Column()
   amount: number;
 
-  @OneToOne(() => Drink)
-  @JoinColumn()
+  @ManyToOne(() => Drink, { onDelete: 'CASCADE' })
   drink: Drink;
 
-  @OneToOne(() => Cocktail)
-  @JoinColumn()
+  @ManyToOne(() => Cocktail, cocktail => cocktail.components, { onDelete: 'CASCADE' })
   cocktail: Cocktail;
 }

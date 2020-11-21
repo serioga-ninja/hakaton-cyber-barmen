@@ -1,9 +1,9 @@
 import { createConnection } from 'typeorm';
 import { Connection } from 'typeorm/connection/Connection';
-import mongoConnectionOptions from './ormconfig';
+import connectionOptions from './ormconfig';
 
-export let MongoConnection: Connection;
+export let dbConnection: Connection;
 
 export const createAllConnections = async () => {
-  MongoConnection = await createConnection(mongoConnectionOptions);
+  dbConnection = await createConnection(connectionOptions);
 };

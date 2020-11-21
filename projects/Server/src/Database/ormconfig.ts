@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
 
-const mongoConnectionOptions: SqliteConnectionOptions = {
+const connectionOptions: SqliteConnectionOptions = {
   'name': 'default',
   'type': 'sqlite',
   database: path.join(__dirname, `db.sqlite3`),
@@ -15,4 +15,4 @@ const mongoConnectionOptions: SqliteConnectionOptions = {
   logging: true
 };
 
-export default mongoConnectionOptions;
+export default connectionOptions;
