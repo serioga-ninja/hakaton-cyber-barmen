@@ -7,6 +7,7 @@ import { CocktailsModule } from './Cocktails';
 import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/connections';
 import { DrinksModule } from './Drinks';
+import { OrderModule } from './Orders/order.module';
 
 class Server {
   private express: Application;
@@ -47,6 +48,7 @@ class Server {
   private register() {
     new DrinksModule().register(this.express);
     new CocktailsModule().register(this.express);
+    new OrderModule().register(this.express);
   }
 
   run(callback: TFunc) {
