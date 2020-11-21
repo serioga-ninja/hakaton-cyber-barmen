@@ -2,6 +2,13 @@
 
 <ul>
   <li *ngFor="let i of list">
-    <div (click)="selectCocktail(i)">{{i.name}}</div>
+    <div (click)="selectCocktail(i)">
+      <div class="name">{{i.name}}</div>
+      <ul class="components">
+        <li *ngFor="let component of i.components">
+          {{component.drink.name}} - {{component.amount}}
+        </li>
+      </ul>
+    </div>
   </li>
 </ul>

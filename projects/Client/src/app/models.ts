@@ -11,4 +11,11 @@ export interface IDrink {
 export interface ICocktail {
   id: string;
   name: string;
+  components: IComponent[]
+}
+
+export interface IComponent {
+  id: string;
+  amount: number;
+  drink: IDrink;
 }
