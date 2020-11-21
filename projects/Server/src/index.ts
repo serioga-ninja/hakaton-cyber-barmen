@@ -7,7 +7,6 @@ import { CocktailsModule } from './Cocktails';
 import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/connections';
 import { DrinksModule } from './Drinks';
-import * as cors from 'cors';
 
 class Server {
   private express: Application;
@@ -22,7 +21,19 @@ class Server {
   }
 
   private middleware() {
-    this.express.use(cors());
+    this.express.use((req, res, next) => {
+
+      // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Vary', 'Origin');
+
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
+      // Pass to next layer of middleware
+      next();
+    });
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     // this.express.use(session({
