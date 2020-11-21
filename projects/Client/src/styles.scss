@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Texturina:wght@100;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Texturina', serif;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    font-size: 16px;
+    background: url('assets/images/bg.jpg') no-repeat top center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #012046;
+        opacity: .4;
+    }
+}
+
+.container {
+    max-width: 1024px;
+    min-width: 320px;
+    padding: 0 15px;
+    margin: 0 auto;
+    position: relative;
+}
