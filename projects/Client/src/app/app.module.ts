@@ -1,5 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ApiService } from './api.service';
 import { AppRoutingModule } from './app-routing,module';
 
 import { AppComponent } from './app.component';
@@ -14,9 +17,13 @@ import { CocktailsComponent } from './cocktails/cocktails.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

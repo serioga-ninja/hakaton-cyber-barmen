@@ -1,1 +1,7 @@
-<p>cocktails works!</p>
+<h1>Cocktails</h1>
+
+<ul>
+  <li *ngFor="let i of list">
+    <div (click)="selectCocktail(i)">{{i.name}}</div>
+  </li>
+</ul>
