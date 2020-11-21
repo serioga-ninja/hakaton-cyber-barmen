@@ -7,7 +7,7 @@ const apiUrls = {
   login: '',
   cocktails: 'http://localhost:3000/api/cocktails',
   drinks: 'http://localhost:3000/api/drinks',
-  cookCocktail: 'http://localhost:3000/api/order'
+  cookCocktail: 'http://localhost:3000/api/orders'
 }
 
 @Injectable({
@@ -28,13 +28,11 @@ export class ApiService {
 
   // TODO
   cookCocktail(cocktail: ICocktail) {
-    console.log(cocktail);
-    
     return this.httpClient.post(apiUrls.cookCocktail, {cocktail: cocktail});
   }
 
   getCocktails(): Observable<ICocktail[]> {
-    
+
     return this.httpClient.get<ICocktail[]>(apiUrls.cocktails);
   }
 

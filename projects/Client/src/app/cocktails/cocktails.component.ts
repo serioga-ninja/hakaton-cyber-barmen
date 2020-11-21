@@ -22,6 +22,8 @@ export class CocktailsComponent implements OnInit {
   }
 
   selectCocktail(item: ICocktail) {
-    this.api.cookCocktail(item);
+    this.api.cookCocktail(item).subscribe(data => {
+
+    });
   }
 }
