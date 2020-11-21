@@ -7,6 +7,7 @@ import { CocktailsModule } from './Cocktails';
 import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/connections';
 import { DrinksModule } from './Drinks';
+import * as cors from 'cors';
 
 class Server {
   private express: Application;
@@ -21,6 +22,7 @@ class Server {
   }
 
   private middleware() {
+    this.express.use(cors());
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     // this.express.use(session({
