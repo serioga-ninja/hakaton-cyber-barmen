@@ -21,8 +21,9 @@ export class CocktailsComponent implements OnInit {
       });
   }
 
-  selectCocktail (item: ICocktail) {
-    console.log('Cook Cocktail', item);
-    this.api.cookCocktail(item);
+  selectCocktail(item: ICocktail) {
+    this.api.cookCocktail(item).subscribe(data => {
+
+    });
   }
 }
