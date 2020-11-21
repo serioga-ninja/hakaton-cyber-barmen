@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
-import { MongoConnection } from '../Database/connections';
+import { dbConnection } from '../Database/connections';
 import { ICreateRequest, IGetManyRequest, IGetOneRequest, IResponse, IUpdateRequest } from './interfaces';
 
 export interface IApiOptions {
@@ -27,7 +27,7 @@ export abstract class Api<T = any> {
 
   protected async getOne(request: IGetOneRequest, response: IResponse) {
     const id = request.params.id;
-    const res = await MongoConnection
+    const res = await dbConnection
       .getRepository(this.entity)
       .findOne(id);
 
@@ -35,7 +35,7 @@ export abstract class Api<T = any> {
   }
 
   protected async getMany(request: IGetManyRequest, response: IResponse) {
-    const res = await MongoConnection
+    const res = await dbConnection
       .getRepository(this.entity)
       .find();
 
@@ -43,7 +43,7 @@ export abstract class Api<T = any> {
   }
 
   protected async create(request: ICreateRequest<T>, response: IResponse) {
-    const res = await MongoConnection
+    const res = await dbConnection
       .getRepository(this.entity)
       .create(request.body);
 
@@ -51,7 +51,7 @@ export abstract class Api<T = any> {
   }
 
   protected async update(request: IUpdateRequest<any>, response: IResponse) {
-    const res = await MongoConnection
+    const res = await dbConnection
       .getRepository(this.entity)
       .save(request.body);
 
@@ -60,7 +60,7 @@ export abstract class Api<T = any> {
 
   protected async delete(request: IUpdateRequest<any>, response: IResponse) {
     const id = request.params.id;
-    const repository = MongoConnection
+    const repository = dbConnection
       .getRepository(this.entity);
 
     const res = await repository.findOne(id);

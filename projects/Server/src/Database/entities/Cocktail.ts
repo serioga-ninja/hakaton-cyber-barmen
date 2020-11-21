@@ -10,7 +10,7 @@ export class Cocktail {
   @Column()
   name: string;
 
-  @ManyToMany(() => Component, component => component.cocktail)
+  @OneToMany(() => Component, component => component.cocktail, { onDelete: 'CASCADE' })
   @JoinTable()
   components: Component[];
 }
