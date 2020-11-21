@@ -33,18 +33,36 @@ export class ApiService {
 
   getCocktails(): Observable<ICocktail[]> {
     const list = [];
-    for (let i = 0; i < 10;i++) {
+    for (let i = 1; i < 10;i++) {
       list.push({
         id: i,
         name: `Cocktail ${i}`,
+        components: [
+          {
+            id: 0,
+            amount: Math.floor(Math.random() * 10),
+            drink: {
+              id: 0,
+              name: 'Drink ' + 0,
+            }
+          },
+          {
+            id: i,
+            amount: Math.floor(Math.random() * 10),
+            drink: {
+              id: i,
+              name: 'Drink ' + i,
+            }
+          }
+        ]
       });
     }
     return of(list);
     // return this.httpClient.get<ICocktail[]>(apiUrls.cocktails);
   }
 
-  getCocktail(cocktail: ICocktail) {
-    return this.httpClient.get<ICocktail>(apiUrls.cocktails + '/' + cocktail.id);
+  getCocktail(cocktailId: string) {
+    return this.httpClient.get<ICocktail>(apiUrls.cocktails + '/' + cocktailId);
   }
   postCocktail(cocktail: ICocktail) {
     return this.httpClient.post<ICocktail>(apiUrls.cocktails, cocktail);
@@ -59,8 +77,8 @@ export class ApiService {
   getDrinks() {
     return this.httpClient.get<IDrink[]>(apiUrls.drinks);
   }
-  getDrink(drink: IDrink) {
-    return this.httpClient.get<IDrink>(apiUrls.drinks + '/' + drink.id);
+  getDrink(drinkId: string) {
+    return this.httpClient.get<IDrink>(apiUrls.drinks + '/' + drinkId);
   }
   postDrink(drink: IDrink) {
     return this.httpClient.post<IDrink>(apiUrls.drinks, drink);
