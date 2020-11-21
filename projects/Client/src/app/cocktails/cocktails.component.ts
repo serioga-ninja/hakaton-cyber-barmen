@@ -5,7 +5,7 @@ import { ICocktail } from '../models';
 @Component({
   selector: 'app-cocktails',
   templateUrl: './cocktails.component.html',
-  styleUrls: ['./cocktails.component.css']
+  styleUrls: ['./cocktails.component.scss']
 })
 export class CocktailsComponent implements OnInit {
   public list: ICocktail[];
@@ -22,6 +22,7 @@ export class CocktailsComponent implements OnInit {
   }
 
   selectCocktail (item: ICocktail) {
+    console.log(item);
     this.api.selectCocktail(item);
   }
 }
