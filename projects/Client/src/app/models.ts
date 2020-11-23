@@ -1,3 +1,8 @@
+export enum UserRole {
+  Guest,
+  Admin,
+  User,
+}
 
 export interface ILoginBody {
   password: string;

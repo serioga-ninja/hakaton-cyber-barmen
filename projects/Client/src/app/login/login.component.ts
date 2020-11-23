@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { ILoginBody } from '../models';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -23,18 +25,7 @@ export class LoginComponent implements OnInit {
     const loginBody: ILoginBody = {
       password: this.phase
     }
-    // TODO
-    this.api.login(loginBody).subscribe(data => {
-      switch (this.phase) {
-        case 'admin':
-          this.router.navigateByUrl('admin');
-          break;
-        case 'user':
-          this.router.navigateByUrl('cocktails');
-          break;
-        default:
-          break;
-      }
-    });
+
+    this.userService.doLogin(loginBody);
   }
 }

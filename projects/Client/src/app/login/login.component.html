@@ -1,9 +1,12 @@
 <app-logo [title]="'Your Personal Bartender'"></app-logo>
 
-<div class="login">
+<form (ngSubmit)="login()" #loginForm="ngForm" class="login">
   <input [(ngModel)]="phase"
          placeholder="Enter Password"
-         type="text">
+         type="text"
+         id="password"
+         required
+         name="password">
   <button (click)="login()" type="submit">Let's MIX</button>
-</div>
+</form>
 

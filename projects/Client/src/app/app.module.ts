@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -14,6 +14,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { DrinksComponent } from './drinks/drinks.component';
 import { DrinkComponent } from './drink/drink.component';
 import { LogoComponent } from './logo/logo.component';
+import { UserService } from './user.service';
+import { CocktailComponent } from './cocktail/cocktail.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { LogoComponent } from './logo/logo.component';
     DrinksComponent,
     DrinkComponent,
     LogoComponent,
+    CocktailComponent,
   ],
   imports: [
     CommonModule,
@@ -31,10 +34,12 @@ import { LogoComponent } from './logo/logo.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot()
   ],
   providers: [
-    ApiService
+    ApiService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

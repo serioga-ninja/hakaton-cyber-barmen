@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { IDrink } from '../models';
 
@@ -13,6 +13,7 @@ export class DrinksComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private route: ActivatedRoute,
     private router: Router
   ) { }
 
@@ -23,11 +24,10 @@ export class DrinksComponent implements OnInit {
   }
 
   create() {
-    this.router.navigateByUrl('admin/drink');
+    this.router.navigate(['../drink'],   {relativeTo: this.route});
   }
 
   update(drink: IDrink) {
-    console.log(drink);
-    this.router.navigate(['admin', 'drink', drink.id]);
+    this.router.navigate(['../drink', drink.id],   {relativeTo: this.route});
   }
 }

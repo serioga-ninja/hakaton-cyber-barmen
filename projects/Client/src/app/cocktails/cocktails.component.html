@@ -1,8 +1,15 @@
-<app-logo [title]="'Cocktails'"></app-logo>
+<app-logo *ngIf="!isAdmin" [title]="'Cocktails'"></app-logo>
+
+<div *ngIf="isAdmin">
+  <button type="submit" (click)="newCocktail($event)">New Cocktail</button>
+</div>
 
 <ol class="cocktail">
   <li (click)="selectCocktail(i)" *ngFor="let i of list" class="cocktail__item">
     <span class="name">{{i.name}}</span>
+    <span *ngIf="isAdmin">
+        <button type="submit" (click)="editCocktail($event, i)">Edit</button>
+      </span>
     <ul class="components">
       <li *ngFor="let component of i.components">
         {{component.drink.name}} - {{component.amount}}
