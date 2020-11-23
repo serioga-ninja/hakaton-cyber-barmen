@@ -7,6 +7,16 @@ export interface IApiOptions {
   baseUrl: string;
 }
 
+const methodWrapper = (method: any, context: Api) => {
+  return async (...args) => {
+    try {
+      await Promise.resolve(method.apply(context, args));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
 export abstract class Api<T = any> {
   abstract entity?: EntityTarget<T>;
 
@@ -18,11 +28,11 @@ export abstract class Api<T = any> {
     const { baseUrl } = this.options;
     const prefix = 'api';
 
-    app.get(`/${prefix}/${baseUrl}`, this.getMany.bind(this));
-    app.get(`/${prefix}/${baseUrl}/:id`, this.getOne.bind(this));
-    app.post(`/${prefix}/${baseUrl}`, this.create.bind(this));
-    app.put(`/${prefix}/${baseUrl}/:id`, this.update.bind(this));
-    app.delete(`/${prefix}/${baseUrl}/:id`, this.delete.bind(this));
+    app.get(`/${prefix}/${baseUrl}`, methodWrapper(this.getMany, this));
+    app.get(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.getOne, this));
+    app.post(`/${prefix}/${baseUrl}`, methodWrapper(this.create, this));
+    app.put(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.update, this));
+    app.delete(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.delete, this));
   }
 
   protected async getOne(request: IGetOneRequest, response: IResponse) {

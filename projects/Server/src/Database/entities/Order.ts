@@ -15,6 +15,9 @@ export class Order {
   @Column({ type: 'simple-enum', enum: OrderStatus, default: OrderStatus.CREATED })
   status: OrderStatus;
 
+  @Column('integer', { name: 'client_id', nullable: false })
+  cocktailId: number;
+
   @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
