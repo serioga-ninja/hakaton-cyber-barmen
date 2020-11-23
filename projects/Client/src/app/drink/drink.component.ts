@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,14 +15,15 @@ export class DrinkComponent implements OnInit {
   public drink: IDrink = {} as IDrink;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
     private api: ApiService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
       this.api.getDrink(this.id).subscribe(data => {
         this.drink = data;
@@ -35,6 +37,7 @@ export class DrinkComponent implements OnInit {
         .subscribe(
           (data) => {
             this.toastr.success(`Drink ${this.drink.name} created`);
+            this.location.back();
           },
           (err) => {
             this.toastr.error(err);
@@ -45,6 +48,7 @@ export class DrinkComponent implements OnInit {
         .subscribe(
           (data) => {
             this.toastr.success(`Drink ${this.drink.name} updated`);
+            this.location.back();
           },
           (err) => {
             this.toastr.error(err);
