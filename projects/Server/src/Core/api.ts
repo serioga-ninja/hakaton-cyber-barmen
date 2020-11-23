@@ -1,4 +1,4 @@
-import { Application } from 'express';
+import { Application, Request, Response } from 'express';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
 import { dbConnection } from '../Database/connections';
 import { ICreateRequest, IGetManyRequest, IGetOneRequest, IResponse, IUpdateRequest } from './interfaces';
@@ -8,17 +8,23 @@ export interface IApiOptions {
 }
 
 const methodWrapper = (method: any, context: Api) => {
-  return async (...args) => {
+  return async (request: Request, response: Response) => {
     try {
-      await Promise.resolve(method.apply(context, args));
+      await Promise.resolve(method.call(context, request, response));
     } catch (e) {
       console.error(e);
+
+      response
+        .status(400)
+        .json({
+          error: e.toString()
+        });
     }
   }
 }
 
 export abstract class Api<T = any> {
-  abstract entity?: EntityTarget<T>;
+  protected abstract entity?: EntityTarget<T>;
 
   constructor(protected options: IApiOptions) {
   }

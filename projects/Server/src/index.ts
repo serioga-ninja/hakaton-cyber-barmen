@@ -6,6 +6,7 @@ import 'reflect-metadata';
 import { CocktailsModule } from './Cocktails';
 import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/connections';
+import { DeviceModule } from './Device/device.module';
 import { DrinksModule } from './Drinks';
 import { OrderModule } from './Orders/order.module';
 
@@ -49,6 +50,7 @@ class Server {
     new DrinksModule().register(this.express);
     new CocktailsModule().register(this.express);
     new OrderModule().register(this.express);
+    new DeviceModule().register();
   }
 
   run(callback: TFunc) {

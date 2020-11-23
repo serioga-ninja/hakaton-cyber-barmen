@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Cocktail } from './Cocktail';
 
 export enum OrderStatus {
@@ -15,7 +23,7 @@ export class Order {
   @Column({ type: 'simple-enum', enum: OrderStatus, default: OrderStatus.CREATED })
   status: OrderStatus;
 
-  @Column('integer', { name: 'client_id', nullable: false })
+  @Column('integer', { nullable: false })
   cocktailId: number;
 
   @CreateDateColumn({ type: 'datetime' })
@@ -24,6 +32,7 @@ export class Order {
   @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
-  @OneToOne(() => Cocktail)
+  @ManyToOne(() => Cocktail, cocktail => cocktail.orders)
+  @JoinTable()
   cocktail: Cocktail;
 }

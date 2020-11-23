@@ -4,7 +4,7 @@ import { dbConnection } from '../Database/connections';
 import { Cocktail } from '../Database/entities/Cocktail';
 
 export class CocktailsApi extends Api {
-  entity: typeof Cocktail;
+  protected entity: typeof Cocktail;
 
   constructor() {
     super({ baseUrl: 'cocktails' });

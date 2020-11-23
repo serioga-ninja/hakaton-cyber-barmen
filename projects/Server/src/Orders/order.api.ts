@@ -1,24 +1,23 @@
 import { Api } from '../Core';
 import { ICreateRequest, IResponse } from '../Core/interfaces';
-import { dbConnection } from '../Database/connections';
 import { Order } from '../Database/entities/Order';
+import { OrdersLogic } from './orders.logic';
 
 export class OrdersApi extends Api {
-  entity: typeof Order;
+  protected ordersLogic: OrdersLogic;
+  protected entity: typeof Order;
 
   constructor() {
     super({ baseUrl: 'orders' });
 
+    this.ordersLogic = new OrdersLogic();
     this.entity = Order;
   }
 
   protected async create(request: ICreateRequest<{ cocktailId }>, response: IResponse): Promise<void> {
-    const res = await dbConnection
-      .getRepository(this.entity)
-      .save({
-        cocktailId: request.body.cocktailId
-      });
+    const { cocktailId } = request.body;
+    const order = await this.ordersLogic.createOrder(cocktailId);
 
-    response.json(res);
+    response.json(order);
   }
 }
