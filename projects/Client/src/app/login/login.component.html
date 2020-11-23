@@ -1,13 +1,9 @@
-<div class="logo">
-       <img src="../../assets/images/logo.png" alt="Logo">
-       <h1>Your Personal Bartender</h1>
-</div>
-
+<app-logo [title]="'Your Personal Bartender'"></app-logo>
 
 <div class="login">
-       <input type="text"
-              placeholder="Enter Password"
-              [(ngModel)]="phase">
-       <button type="submit" (click)="login()">Let's MIX</button>
+  <input [(ngModel)]="phase"
+         placeholder="Enter Password"
+         type="text">
+  <button (click)="login()" type="submit">Let's MIX</button>
 </div>
 

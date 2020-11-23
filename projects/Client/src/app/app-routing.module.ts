@@ -19,11 +19,11 @@ const routes: Routes = [
         component: DrinksComponent,
       },
       {
-        path: 'drink', // child route path
+        path: 'drink/:id', // child route path
         component: DrinkComponent,
       },
       {
-        path: 'drink/:id', // child route path
+        path: 'drink', // child route path
         component: DrinkComponent,
       },
       /*{

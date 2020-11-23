@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { IDrink } from '../models';
 
@@ -15,26 +16,40 @@ export class DrinkComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
-  ) { }
+    private toastr: ToastrService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-
-      if (this.id) {
-        this.api.getDrink(this.id).subscribe(data => {
-          this.drink = data;
-        });
-      }
-    });
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.api.getDrink(this.id).subscribe(data => {
+        this.drink = data;
+      });
+    }
   }
 
   save() {
     if (!this.drink.id) {
-      this.api.postDrink(this.drink);
+      this.api.postDrink(this.drink)
+        .subscribe(
+          (data) => {
+            this.toastr.success(`Drink ${this.drink.name} created`);
+          },
+          (err) => {
+            this.toastr.error(err);
+          }
+        );
     } else {
-      this.api.updateDrink(this.drink);
+      this.api.updateDrink(this.drink)
+        .subscribe(
+          (data) => {
+            this.toastr.success(`Drink ${this.drink.name} updated`);
+          },
+          (err) => {
+            this.toastr.error(err);
+          }
+        );
     }
   }
-
 }

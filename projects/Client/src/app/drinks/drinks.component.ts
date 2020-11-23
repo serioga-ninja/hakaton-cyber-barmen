@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { IDrink } from '../models';
 
@@ -12,6 +13,7 @@ export class DrinksComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -21,10 +23,11 @@ export class DrinksComponent implements OnInit {
   }
 
   create() {
-
+    this.router.navigateByUrl('admin/drink');
   }
 
   update(drink: IDrink) {
     console.log(drink);
+    this.router.navigate(['admin', 'drink', drink.id]);
   }
 }

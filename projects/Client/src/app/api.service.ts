@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subscribable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ICocktail, IDrink, ILoginBody } from './models';
 
 const apiUrls = {
@@ -26,9 +26,8 @@ export class ApiService {
     // return this.httpClient.post(apiUrls.login, data);
   }
 
-  // TODO
   cookCocktail(cocktail: ICocktail) {
-    return this.httpClient.post(apiUrls.cookCocktail, {cocktail: cocktail});
+    return this.httpClient.post(apiUrls.cookCocktail, {cocktailId: cocktail.id});
   }
 
   getCocktails(): Observable<ICocktail[]> {
@@ -59,10 +58,10 @@ export class ApiService {
     return this.httpClient.post<IDrink>(apiUrls.drinks, drink);
   }
   updateDrink(drink: IDrink) {
-    return this.httpClient.put<IDrink>(apiUrls.drinks, drink);
+    return this.httpClient.put<IDrink>(apiUrls.drinks + '/' + drink.id, drink);
   }
   deleteDrink(drink: IDrink) {
-    return this.httpClient.delete(apiUrls.cocktails + '/' + drink.id);
+    return this.httpClient.delete(apiUrls.drinks + '/' + drink.id);
   }
 
 }

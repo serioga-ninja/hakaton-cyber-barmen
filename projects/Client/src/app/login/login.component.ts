@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     const loginBody: ILoginBody = {
       password: this.phase
     }
+    // TODO
     this.api.login(loginBody).subscribe(data => {
       switch (this.phase) {
         case 'admin':
