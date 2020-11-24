@@ -5,7 +5,7 @@ import { CocktailComponent } from './cocktail/cocktail.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
 import { DrinkComponent } from './drink/drink.component';
 import { DrinksComponent } from './drinks/drinks.component';
-import { LoginComponent } from './login/login.component'; // CLI imports router
+import { LoginComponent } from './login/login.component';
 
 // TODO add guards
 const routes: Routes = [

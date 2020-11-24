@@ -42,7 +42,7 @@ export class ApiService {
     return this.httpClient.post<ICocktail>(apiUrls.cocktails, cocktail);
   }
   updateCocktail(cocktail: ICocktail) {
-    return this.httpClient.put<ICocktail>(apiUrls.cocktails, cocktail);
+    return this.httpClient.put<ICocktail>(apiUrls.cocktails + '/' + cocktail.id, cocktail);
   }
   deleteCocktail(cocktail: ICocktail) {
     return this.httpClient.delete(apiUrls.cocktails + '/' + cocktail.id);
