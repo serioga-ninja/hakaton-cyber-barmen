@@ -2,6 +2,7 @@ import { createConnection } from 'typeorm';
 import { Cocktail } from '../entities/Cocktail';
 import { Component } from '../entities/Component';
 import { Drink } from '../entities/Drink';
+import { Pipe } from '../entities/Pipe';
 import connectionOptions from '../ormconfig';
 
 export class DefaultData {
@@ -10,32 +11,33 @@ export class DefaultData {
     const drinksRepo = dbConnection.getRepository(Drink);
     const cocktailRepo = dbConnection.getRepository(Cocktail);
     const componentRepo = dbConnection.getRepository(Component);
+    const pipeRepo = dbConnection.getRepository(Pipe);
 
     await drinksRepo.createQueryBuilder().delete().execute();
     const [gin, vodka, tonik, vermout, grenadine, appleJuice] = await drinksRepo.save([
       {
         name: 'Gin',
-        capacity: 100
+        capacity:  33
       },
       {
         name: 'Vodka',
-        capacity: 100
+        capacity:  33
       },
       {
         name: 'Tonic',
-        capacity: 100
+        capacity:  33
       },
       {
         name: 'Vermout',
-        capacity: 100
+        capacity:  33
       },
       {
         name: 'Syrop Grenadine',
-        capacity: 100
+        capacity:  33
       },
       {
         name: 'Apple juice',
-        capacity: 100
+        capacity:  33
       }
     ]);
 
@@ -233,6 +235,30 @@ export class DefaultData {
 
 
     ]);
+
+    await pipeRepo.createQueryBuilder().delete().execute();
+
+    await pipeRepo.save([
+      {
+        drink: gin
+      },
+      {
+        drink: vodka
+      },
+      {
+        drink: tonik
+      },
+      {
+        drink: vermout
+      },
+      {
+        drink: grenadine
+      },
+      {
+        drink: appleJuice
+      },
+    ]);
+
   }
 }
 

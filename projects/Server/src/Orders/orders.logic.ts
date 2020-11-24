@@ -21,7 +21,7 @@ export class OrdersLogic {
     const order = await orderRepository
       .findOne({
         where: { id: res.id },
-        relations: ['cocktail', 'cocktail.components', 'cocktail.components.drink']
+        relations: ['cocktail', 'cocktail.components', 'cocktail.components.drink', 'cocktail.components.drink.pipe']
       });
 
     this.ordersQueue.add(order);

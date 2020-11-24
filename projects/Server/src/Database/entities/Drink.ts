@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Pipe } from './Pipe';
 
 @Entity()
 export class Drink {
@@ -9,5 +10,8 @@ export class Drink {
   name: string;
 
   @Column()
-  capacity: number; // litra in minuta
+  capacity: number; // ml a sec
+
+  @OneToOne(() => Pipe)
+  pipe: Pipe;
 }

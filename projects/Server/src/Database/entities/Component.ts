@@ -8,7 +8,7 @@ export class Component {
   id: number;
 
   @Column()
-  amount: number;
+  amount: number; // ml
 
   @ManyToOne(() => Drink, { onDelete: 'CASCADE' })
   drink: Drink;
