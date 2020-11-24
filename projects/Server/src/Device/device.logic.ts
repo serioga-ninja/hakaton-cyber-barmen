@@ -9,7 +9,7 @@ class PipeProcess {
   private readonly timeToPour: number;
 
   constructor(private component: Component, private device: Device) {
-    this.timeToPour = component.amount / component.drink.capacity;
+    this.timeToPour = (component.amount / component.drink.capacity) * 1000;
   }
 
   run() {
