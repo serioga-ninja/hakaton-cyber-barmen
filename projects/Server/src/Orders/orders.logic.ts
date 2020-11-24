@@ -1,12 +1,13 @@
 import { dbConnection } from '../Database/connections';
 import { Order } from '../Database/entities/Order';
-import { OrdersQueue } from './orders-queue';
+import deviceConnector from '../Device/device.connector';
+import { DeviceOrdersQueue } from '../Device/device.orders-queue';
 
 export class OrdersLogic {
-  private ordersQueue: OrdersQueue;
+  private ordersQueue: DeviceOrdersQueue;
 
   constructor() {
-    this.ordersQueue = new OrdersQueue();
+    this.ordersQueue = new DeviceOrdersQueue();
   }
 
   async createOrder(cocktailId: number): Promise<Order> {
@@ -24,7 +25,7 @@ export class OrdersLogic {
         relations: ['cocktail', 'cocktail.components', 'cocktail.components.drink']
       });
 
-    this.ordersQueue.add(order);
+    deviceConnector.addOrder(order.id);
 
     return order;
   }

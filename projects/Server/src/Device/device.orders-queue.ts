@@ -1,8 +1,9 @@
 import logger from '../Core/logger';
+import { dbConnection } from '../Database/connections';
 import { Order } from '../Database/entities/Order';
-import deviceLogic from '../Device/device.logic';
+import deviceLogic from './device.logic';
 
-export class OrdersQueue {
+export class DeviceOrdersQueue {
   protected inProgress: boolean = false;
 
   private items: Order[];
@@ -11,7 +12,14 @@ export class OrdersQueue {
     this.items = [];
   }
 
-  add(order: Order) {
+  async add(id: number) {
+    const order = await dbConnection
+      .getRepository(Order)
+      .findOne({
+        where: { id: id },
+        relations: ['cocktail', 'cocktail.components', 'cocktail.components.drink']
+      });
+
     this.items.push(order);
 
     if (!this.inProgress) {

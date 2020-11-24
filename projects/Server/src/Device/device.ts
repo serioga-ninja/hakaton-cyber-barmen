@@ -42,7 +42,9 @@ export class Device {
         this.state.next(DeviceState.WAITING_FOR_ORDER);
       }
     });
-
+    this.state.subscribe((state) => {
+      logger.info(`Device state: ${state}`);
+    });
 
     process.on('SIGINT', () => { //on ctrl+c
 

@@ -1,4 +1,3 @@
-import 'rxjs/add/operator/filter';
 import { filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
 import { dbConnection } from '../Database/connections';

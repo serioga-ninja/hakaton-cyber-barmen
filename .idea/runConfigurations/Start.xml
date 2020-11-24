@@ -1,5 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Start" type="NodeJSConfigurationType" node-parameters="-r ts-node\register" path-to-js-file="projects/Server/src/index.ts" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="Start" type="NodeJSConfigurationType" path-to-js-file="projects/Server/src/index.ts" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="NODE_ENV" value="local" />
+    </envs>
     <method v="2" />
   </configuration>
 </component>
