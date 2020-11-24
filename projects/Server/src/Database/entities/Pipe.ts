@@ -6,6 +6,9 @@ export class Pipe {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  drinkId: number;
+
   @ManyToOne(() => Drink)
   @JoinTable()
   drink: Drink;
