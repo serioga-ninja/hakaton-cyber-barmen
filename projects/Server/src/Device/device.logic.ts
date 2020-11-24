@@ -1,9 +1,11 @@
+import 'rxjs/add/operator/filter';
+import { filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
 import { dbConnection } from '../Database/connections';
 import { Component } from '../Database/entities/Component';
 import { Order } from '../Database/entities/Order';
 import { Pipe } from '../Database/entities/Pipe';
-import { Device } from './device';
+import { Device, DeviceState } from './device';
 
 class PipeProcess {
   private readonly timeToPour: number;
@@ -37,10 +39,20 @@ export class DeviceLogic {
     this.device = new Device();
   }
 
-  prepareOrder(order: Order) {
-    return Promise.all(order.cocktail.components.map((component) => {
+  async prepareOrder(order: Order) {
+    await this.device.state
+      .pipe(
+        filter((state) => state === DeviceState.WAITING_FOR_ORDER),
+        take(1)
+      ).toPromise();
+
+    this.device.state.next(DeviceState.PURRING_DRINKS);
+
+    await Promise.all(order.cocktail.components.map((component) => {
       return new PipeProcess(component, this.device).run();
-    }))
+    }));
+
+    this.device.state.next(DeviceState.WAITING_FOR_TAKE_GLASS_TAKEN);
   }
 }
 
