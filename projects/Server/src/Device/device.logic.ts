@@ -1,6 +1,8 @@
 import logger from '../Core/logger';
+import { dbConnection } from '../Database/connections';
 import { Component } from '../Database/entities/Component';
 import { Order } from '../Database/entities/Order';
+import { Pipe } from '../Database/entities/Pipe';
 import { Device } from './device';
 
 class PipeProcess {
@@ -11,13 +13,16 @@ class PipeProcess {
   }
 
   run() {
-    return new Promise<void>((resolve) => {
-      logger.info(`Activating pipe for ${this.timeToPour} ms`, this.component.drink.pipe);
-      this.device.activatePipe(this.component.drink.pipe);
+    return new Promise<void>(async (resolve) => {
+      const pipeRepo = dbConnection.getRepository(Pipe);
+      const pipe = await pipeRepo.findOne({ where: { drinkId: this.component.drink.id } });
+
+      logger.info(`Activating pipe for ${this.timeToPour} ms`, pipe);
+      this.device.activatePipe(pipe);
 
       setTimeout(() => {
-        logger.info('Deactivating pipe:', this.component.drink.pipe);
-        this.device.deactivatePipe(this.component.drink.pipe);
+        logger.info('Deactivating pipe:', pipe);
+        this.device.deactivatePipe(pipe);
         resolve();
       }, this.timeToPour);
     });
