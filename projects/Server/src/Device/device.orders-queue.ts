@@ -36,7 +36,7 @@ export class DeviceOrdersQueue {
       try {
         await deviceLogic.prepareOrder(order);
       } catch (e) {
-        logger.error(`Queue error on exercise: ${JSON.stringify(order)}`);
+        logger.error(`Queue error on order: ${JSON.stringify(order)}`);
       }
     }
     logger.info(`Queue finished`);
