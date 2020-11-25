@@ -16,6 +16,7 @@ import { DrinkComponent } from './drink/drink.component';
 import { LogoComponent } from './logo/logo.component';
 import { UserService } from './user.service';
 import { CocktailComponent } from './cocktail/cocktail.component';
+import { ConfigComponent } from './config/config.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CocktailComponent } from './cocktail/cocktail.component';
     DrinkComponent,
     LogoComponent,
     CocktailComponent,
+    ConfigComponent,
   ],
   imports: [
     CommonModule,

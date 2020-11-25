@@ -43,15 +43,11 @@ export class CocktailsComponent implements OnInit {
   *  */
   newCocktail(event: MouseEvent) {
     event.stopImmediatePropagation();
-    // TODO navigate to new form
-
     this.router.navigate([`../cocktail`],   {relativeTo: this.route});
   }
 
   editCocktail(event: MouseEvent, item: ICocktail) {
     event.stopImmediatePropagation();
     this.router.navigate([`../cocktail`, item.id],   {relativeTo: this.route});
-    console.log(item);
-    // TODO navigate to edit form
   }
 }

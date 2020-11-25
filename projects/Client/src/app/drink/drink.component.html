@@ -1,5 +1,7 @@
 <h2>Drink</h2>
 
+<button (click)="save()">Save</button>
+
 <div class="row">
   <label for="drink-name">Name</label>
   <input type="text" id="drink-name" [(ngModel)]="drink.name">
@@ -9,5 +11,3 @@
   <label for="drink-capacity">Capacity</label>
   <input type="number" id="drink-capacity" [(ngModel)]="drink.capacity" min="0">
 </div>
-
-<button (click)="save()">Save</button>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CocktailComponent } from './cocktail/cocktail.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
+import { ConfigComponent } from './config/config.component';
 import { DrinkComponent } from './drink/drink.component';
 import { DrinksComponent } from './drinks/drinks.component';
 import { LoginComponent } from './login/login.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'cocktail',
         component: CocktailComponent,
+      },
+      {
+        path: 'config',
+        component: ConfigComponent,
       },
     ],
   }
