@@ -12,7 +12,7 @@ const methodWrapper = (method: any, context: Api) => {
     try {
       await Promise.resolve(method.call(context, request, response));
     } catch (e) {
-      console.error(e);
+      // console.error(e);
 
       response
         .status(400)

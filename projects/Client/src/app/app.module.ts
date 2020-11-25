@@ -5,8 +5,9 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiService } from './api.service';
-import { AppRoutingModule } from './app-routing.module';
+import { SocketService } from './socket-service/socket.service';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
@@ -39,7 +40,8 @@ import { CocktailComponent } from './cocktail/cocktail.component';
   ],
   providers: [
     ApiService,
-    UserService
+    UserService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })

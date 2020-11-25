@@ -8,10 +8,14 @@ import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/connections';
 import { DrinksModule } from './Drinks';
 import { OrderModule } from './Orders/order.module';
+import { IOptions, ServerStream } from "./Core/server.stream";
 import { PipesModule } from './Pipes/pipes.module';
 
 class Server {
   private express: Application;
+  private eventStreamOptions: IOptions = {
+    retry: 10000
+  };
 
   constructor() {
     this.express = express();
@@ -51,6 +55,7 @@ class Server {
     new CocktailsModule().register(this.express);
     new OrderModule().register(this.express);
     new PipesModule().register(this.express);
+    ServerStream.getInstance(this.express, this.eventStreamOptions);
   }
 
   run(callback: TFunc) {
