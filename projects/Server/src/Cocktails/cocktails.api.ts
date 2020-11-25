@@ -1,5 +1,5 @@
 import { Api } from '../Core';
-import { IGetManyRequest, IResponse } from '../Core/interfaces';
+import { IGetManyRequest, IGetOneRequest, IResponse } from '../Core/interfaces';
 import { dbConnection } from '../Database/connections';
 import { Cocktail } from '../Database/entities/Cocktail';
 
@@ -19,6 +19,18 @@ export class CocktailsApi extends Api {
         relations: ['components', 'components.drink']
       })
     ;
+
+    response.json(res);
+  }
+  protected async getOne(request: IGetOneRequest, response: IResponse) {
+    const id = request.params.id;
+    const res = await dbConnection
+        .getRepository(this.entity)
+        .findOne(
+            id,
+            {
+          relations: ['components', 'components.drink']
+        });
 
     response.json(res);
   }
