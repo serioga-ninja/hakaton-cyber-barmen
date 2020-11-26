@@ -11,6 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiService } from './api.service';
+import { SocketService } from './socket-service/socket.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -52,7 +54,8 @@ import { ConfigComponent } from './config/config.component';
   ],
   providers: [
     ApiService,
-    UserService
+    UserService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })

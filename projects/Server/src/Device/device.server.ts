@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as http from 'http';
 import 'reflect-metadata';
 import { TFunc } from '../Core/types';
-import { createAllConnections } from '../Database/connections';
+import { createAllConnections } from '../Database/ormconfig';
 import { DeviceModule } from './device.module';
 
 class Server {

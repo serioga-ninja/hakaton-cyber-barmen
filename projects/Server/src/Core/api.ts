@@ -1,6 +1,6 @@
 import { Application, Request, Response } from 'express';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
-import { dbConnection } from '../Database/connections';
+import { dbConnection } from '../Database/ormconfig';
 import { ICreateRequest, IGetManyRequest, IGetOneRequest, IResponse, IUpdateRequest } from './interfaces';
 
 export interface IApiOptions {
@@ -12,7 +12,7 @@ const methodWrapper = (method: any, context: Api) => {
     try {
       await Promise.resolve(method.call(context, request, response));
     } catch (e) {
-      console.error(e);
+      // console.error(e);
 
       response
         .status(400)

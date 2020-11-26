@@ -3,7 +3,7 @@ import { Cocktail } from '../entities/Cocktail';
 import { Component } from '../entities/Component';
 import { Drink } from '../entities/Drink';
 import { Pipe } from '../entities/Pipe';
-import connectionOptions from '../ormconfig';
+import { connectionOptions } from '../ormconfig';
 
 export class DefaultData {
   async run() {

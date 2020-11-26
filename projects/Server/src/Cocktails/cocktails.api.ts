@@ -1,7 +1,7 @@
 import { Api } from '../Core';
 import { IGetManyRequest, IGetOneRequest, IResponse } from '../Core/interfaces';
-import { dbConnection } from '../Database/connections';
 import { Cocktail } from '../Database/entities/Cocktail';
+import { dbConnection } from '../Database/ormconfig';
 
 export class CocktailsApi extends Api {
   protected entity: typeof Cocktail;

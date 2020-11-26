@@ -1,9 +1,11 @@
 import { filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
-import { dbConnection } from '../Database/connections';
+import { EventTypes, ServerStreamEvent } from '../Core/server-stream-events';
+import { CustomEventTypes, eventEmitterInstance } from '../Core/server.stream';
 import { Component } from '../Database/entities/Component';
 import { Order } from '../Database/entities/Order';
 import { Pipe } from '../Database/entities/Pipe';
+import { dbConnection } from '../Database/ormconfig';
 import { Device, DeviceState } from './device';
 
 class PipeProcess {
@@ -45,6 +47,7 @@ export class DeviceLogic {
         take(1)
       ).toPromise();
 
+    eventEmitterInstance.emit(CustomEventTypes.SEND_DATA, new ServerStreamEvent(EventTypes.START_NEW_ORDER, order));
     this.device.state.next(DeviceState.PURRING_DRINKS);
 
     await Promise.all(order.cocktail.components.map((component) => {

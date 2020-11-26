@@ -7,7 +7,6 @@ export class DeviceApi {
 
   register(app: Application) {
     app.post('/api/order/:id', (request: Request<{ id: number; }>, response: Response) => {
-      console.log(request);
       const { id } = request.params;
 
       this.orderQueue.add(id);
