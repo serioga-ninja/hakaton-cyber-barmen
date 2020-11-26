@@ -1,14 +1,18 @@
-<h2>Config</h2>
+<div class="section">
+  <h2>Config</h2>
 
-<div class="row">
-  <button (click)="save()">Save</button>
+  <div class="row">
+    <button (click)="save()">Save</button>
+  </div>
+
+  <ul class="list">
+    <li  class="list__item" *ngFor="let item of items; index as i;">
+      <mat-label>Pipe {{1+i}}</mat-label>
+      <mat-select [(value)]="item.drinkId">
+        <mat-option *ngFor="let option of drinks" [value]="option.id">
+          {{option.name}}
+        </mat-option>
+      </mat-select>
+    </li>
+  </ul>
 </div>
-
-<ol>
-  <li *ngFor="let item of items; index as i;" class="row">
-    <select name="pipe-{{i}}" id="pipe-{{i}}" [(ngModel)]="items[i]">
-      <option *ngFor="let drink of drinks" [ngValue]="drink.id" [selected]="items[i] === drink.id ? 'selected' : ''">{{drink.name}} - {{items[i]}}</option>
-    </select>
-  </li>
-</ol>
-

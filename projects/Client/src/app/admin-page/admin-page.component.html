@@ -1,13 +1,11 @@
-<app-logo [title]="'Configurator'"></app-logo>
+<app-logo [title]="'Your Personal Bartender'"></app-logo>
 
-<div class="top-menu">
+<div class="menu">
   <button (click)="back()">Back</button>
   <nav>
-    <ul>
-      <li><a [routerLink]="'cocktails'">Cocktails</a></li>
-      <li><a [routerLink]="'drinks'">Drinks</a></li>
-      <li><a [routerLink]="'config'">Settings</a></li>
-    </ul>
+    <button [routerLink]="'cocktails'">Cocktails</button>
+    <button [routerLink]="'drinks'">Drinks</button>
+    <button [routerLink]="'config'">Settings</button>
   </nav>
 </div>
 <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { IDrink } from '../models';
+import { IConfigPipe, IDrink } from '../models';
 
 @Component({
   selector: 'app-config',
@@ -8,7 +8,7 @@ import { IDrink } from '../models';
   styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent implements OnInit {
-  public items: string[] = new Array(4);;
+  public items: IConfigPipe[] = [];
   public drinks: IDrink[];
 
   constructor(
@@ -16,13 +16,28 @@ export class ConfigComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    for (let i = 0; i < 6; i++) {
+      this.items.push(
+        {
+          drinkId: '',
+          id: i
+        });
+    }
+
+    console.log(this.items);
+    this.api.getConfig().subscribe(data => {
+      if (data && data.length) {
+        this.items = data;
+      }
+    });
+
     this.api.getDrinks().subscribe(data => {
       this.drinks = data;
     });
   }
 
   save() {
-
+    console.log(this.items);
+    this.api.setConfig(this.items);
   }
-
 }

@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ICocktail, IDrink, ILoginBody } from './models';
+import { ICocktail, IConfigPipe, IDrink, ILoginBody } from './models';
+
+const baseAPI = 'http://localhost:3000/api/';
 
 const apiUrls = {
   login: '',
-  cocktails: 'http://localhost:3000/api/cocktails',
-  drinks: 'http://localhost:3000/api/drinks',
-  cookCocktail: 'http://localhost:3000/api/orders'
+  config: `${baseAPI}config`,
+  cocktails: `${baseAPI}cocktails`,
+  drinks: `${baseAPI}drinks`,
+  cookCocktail: `${baseAPI}orders`,
 }
 
 @Injectable({
@@ -30,8 +33,14 @@ export class ApiService {
     return this.httpClient.post(apiUrls.cookCocktail, {cocktailId: cocktail.id});
   }
 
-  getCocktails(): Observable<ICocktail[]> {
+  getConfig() {
+    return this.httpClient.get<IConfigPipe[]>(apiUrls.config);
+  }
+  setConfig(body: IConfigPipe[]) {
+    return this.httpClient.put<IConfigPipe[]>(apiUrls.config, body);
+  }
 
+  getCocktails(): Observable<ICocktail[]> {
     return this.httpClient.get<ICocktail[]>(apiUrls.cocktails);
   }
 
