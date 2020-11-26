@@ -1,6 +1,6 @@
-import { EventEmitter } from "events";
-import { Application } from "express";
-import { Request, Response } from 'express';
+import { EventEmitter } from 'events';
+import { Application, Request, Response } from 'express';
+import { ServerStreamEvent } from './server-stream-events';
 
 export interface IOptions{
     retry: number
@@ -40,7 +40,7 @@ export class ServerStream {
             response.write(`retry: ${options.retry}\n`);
             response.flushHeaders();
 
-            eventEmitterInstance.on(CustomEventTypes.SEND_DATA, data => {
+            eventEmitterInstance.on(CustomEventTypes.SEND_DATA, (data: ServerStreamEvent) => {
                 response.write('data: ' + data + '\n\n')
             });
 
