@@ -69,4 +69,25 @@ export class CocktailComponent implements OnInit {
         );
     }
   }
+
+  isCanUp(c: IComponent, index: number): boolean {
+    return index !== 0;
+  }
+
+  isCanDown(c: IComponent, index: number): boolean {
+    return index !== this.cocktail.components.length - 1;
+  }
+
+  up(c: IComponent, i: number) {
+    let tmp = this.cocktail.components[i];
+    this.cocktail.components[i] = this.cocktail.components[i-1];
+    this.cocktail.components[i-1] = tmp;
+  }
+  down(c: IComponent, i: number) {
+    let tmp = this.cocktail.components[i];
+    this.cocktail.components[i] = this.cocktail.components[i+1];
+    this.cocktail.components[i+1] = tmp;
+  }
+
+
 }

@@ -1,10 +1,15 @@
-<h2>Drinks</h2>
+<div class="section">
+  <h2>Drinks</h2>
+  <div class="row">
+    <button (click)="create()">Add New</button>
+  </div>
 
-<button (click)="create()">Add New</button>
-
-<ul>
-  <li *ngFor="let i of drinks">
-    {{i.name}}
-    <button (click)="update(i)">Update</button>
-  </li>
-</ul>
+  <ul class="list">
+    <li class="list__item" *ngFor="let i of drinks">
+      <div class="name">
+        {{i.name}}
+      </div>
+      <button (click)="update(i)">Update</button>
+    </li>
+  </ul>
+</div>

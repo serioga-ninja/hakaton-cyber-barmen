@@ -1,28 +1,50 @@
-<h2>Cocktail</h2>
-
-<div class="row">
-  <label for="name">Title</label>
-  <input type="text" id="name" [(ngModel)]="cocktail.name">
-</div>
-
-<h3>Drinks</h3>
-<div class="row" *ngFor="let c of cocktail.components">
+<div class="section">
   <div class="row">
-    <label for="drink-name">Drink</label>
-    <select name="" id="drink-name" [(ngModel)]="c.drink">
-      <option *ngFor="let drink of drinks" [ngValue]="drink" [selected]="c.drink.id === drink.id ? 'selected' : ''">{{drink.name}}</option>
-    </select>
+    <h2>
+      Cocktail
+      <button class="btn-save" (click)="save()">Save</button>
+    </h2>
   </div>
+
   <div class="row">
-    <label for="drink-capacity">Capacity</label>
-    <input type="number" id="drink-capacity" [(ngModel)]="c.amount" min="0" max="300">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput type="text" [(ngModel)]="cocktail.name">
+    </mat-form-field>
   </div>
-</div>
 
-<div class="row">
-  <button (click)="addDrink()">Add Drink</button>
-</div>
+  <div class="row">
+    <h3>Drinks</h3>
+  </div>
 
-<div class="row">
-  <button (click)="save()">Save</button>
+  <ul class="list">
+    <li class="list__item" *ngFor="let c of cocktail.components;index as i;">
+      <div class="row drink">
+        <mat-form-field class="drink-column">
+          <mat-label>Drink</mat-label>
+          <mat-select [(value)]="c.drink">
+            <mat-option *ngFor="let option of drinks" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <div class="drink-column">
+          <mat-form-field>
+            <mat-label>Capacity</mat-label>
+            <input matInput type="text" [(ngModel)]="c.amount" min="0" max="300">
+          </mat-form-field>
+        </div>
+
+        <div class="buttons">
+          <button *ngIf="isCanUp(c, i)" (click)="up(c, i)">Up</button>
+          <button *ngIf="isCanDown(c, i)" (click)="down(c, i)">Down</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="row">
+    <button (click)="addDrink()">Add Drink</button>
+  </div>
 </div>
