@@ -1,5 +1,5 @@
-import { dbConnection } from '../Database/connections';
 import { Order } from '../Database/entities/Order';
+import { dbConnection } from '../Database/ormconfig';
 import deviceConnector from '../Device/device.connector';
 
 export class OrdersLogic {

@@ -5,7 +5,7 @@ import * as http from 'http';
 import 'reflect-metadata';
 import { CocktailsModule } from './Cocktails';
 import { TFunc } from './Core/types';
-import { createAllConnections } from './Database/connections';
+import { createAllConnections } from './Database/ormconfig';
 import { DrinksModule } from './Drinks';
 import { OrderModule } from './Orders/order.module';
 import { IOptions, ServerStream } from "./Core/server.stream";

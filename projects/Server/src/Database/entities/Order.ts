@@ -26,10 +26,10 @@ export class Order {
   @Column('integer', { nullable: false })
   cocktailId: number;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @ManyToOne(() => Cocktail, cocktail => cocktail.orders)

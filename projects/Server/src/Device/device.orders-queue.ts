@@ -1,6 +1,6 @@
 import logger from '../Core/logger';
-import { dbConnection } from '../Database/connections';
 import { Order } from '../Database/entities/Order';
+import { dbConnection } from '../Database/ormconfig';
 import deviceLogic from './device.logic';
 
 export class DeviceOrdersQueue {

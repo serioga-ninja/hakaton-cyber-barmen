@@ -1,6 +1,6 @@
 import { Application, Request, Response } from 'express';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
-import { dbConnection } from '../Database/connections';
+import { dbConnection } from '../Database/ormconfig';
 import { ICreateRequest, IGetManyRequest, IGetOneRequest, IResponse, IUpdateRequest } from './interfaces';
 
 export interface IApiOptions {

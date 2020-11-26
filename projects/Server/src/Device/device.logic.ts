@@ -1,9 +1,9 @@
 import { filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
-import { dbConnection } from '../Database/connections';
 import { Component } from '../Database/entities/Component';
 import { Order } from '../Database/entities/Order';
 import { Pipe } from '../Database/entities/Pipe';
+import { dbConnection } from '../Database/ormconfig';
 import { Device, DeviceState } from './device';
 
 class PipeProcess {
