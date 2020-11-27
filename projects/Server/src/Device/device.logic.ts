@@ -23,9 +23,13 @@ class PipeProcess {
       logger.info(`Activating pipe for ${this.timeToPour} ms`, pipe);
       this.device.activatePipe(pipe);
 
-      setTimeout(() => {
-        logger.info('Deactivating pipe:', pipe);
+      setTimeout(async () => {
         this.device.deactivatePipe(pipe);
+
+        pipe.capacityLeft -= this.component.amount;
+        await pipeRepo
+          .save(pipe);
+        
         resolve();
       }, this.timeToPour);
     });

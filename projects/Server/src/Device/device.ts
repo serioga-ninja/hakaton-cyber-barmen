@@ -13,9 +13,11 @@ export enum DeviceState {
 export class Device {
   state: BehaviorSubject<DeviceState>;
   pipes: Gpio[];
+  activePipes: Gpio[];
   glassHolder: Gpio;
 
   constructor() {
+    this.activePipes = [];
     this.state = new BehaviorSubject<DeviceState>(DeviceState.WAITING_FOR_ORDER);
     this.pipes = [
       null,
@@ -39,9 +41,11 @@ export class Device {
       if (this.state.getValue() === DeviceState.WAITING_FOR_TAKE_GLASS_TAKEN) {
         this.state.next(DeviceState.WAITING_FOR_GLASS);
       } else {
+        this.deactivateAllPipes();
         this.state.next(DeviceState.WAITING_FOR_ORDER);
       }
     });
+
     this.state.subscribe((state) => {
       logger.info(`Device state: ${state}`);
     });
@@ -62,11 +66,23 @@ export class Device {
   activatePipe(pipe: Pipe) {
     const devicePipe = this.pipes[pipe.id];
     devicePipe.writeSync(1);
+    this.activePipes.push(devicePipe);
   }
 
   deactivatePipe(pipe: Pipe) {
+    logger.info('Deactivating pipe:', pipe);
     const devicePipe = this.pipes[pipe.id];
     devicePipe.writeSync(0);
+    this.activePipes.splice(
+      this.activePipes.indexOf(devicePipe),
+      1
+    );
+  }
+
+  deactivateAllPipes() {
+    for (const pipe of this.activePipes) {
+      pipe.writeSync(0);
+    }
   }
 
 }
