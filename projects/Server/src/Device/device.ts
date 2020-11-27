@@ -42,7 +42,7 @@ export class Device {
       if (this.state.getValue() === DeviceState.WAITING_FOR_TAKE_GLASS_TAKEN) {
         this.state.next(DeviceState.WAITING_FOR_GLASS);
       } else {
-        this.deactivateAllPipes();
+        // this.deactivateAllPipes();
         this.state.next(DeviceState.WAITING_FOR_ORDER);
       }
     });
