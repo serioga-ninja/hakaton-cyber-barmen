@@ -1,7 +1,8 @@
 export enum EventTypes {
   ORDER_IS_READY = 1,
   API_SERSVER_START,
-  START_NEW_ORDER
+  START_NEW_ORDER,
+  BOTTLE_IS_EMPTY
 }
 
 export class ServerStreamEvent<T = any> {

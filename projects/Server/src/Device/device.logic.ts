@@ -29,6 +29,10 @@ class PipeProcess {
         pipe.capacityLeft -= this.component.amount;
         await pipeRepo.save(pipe);
 
+        if (pipe.capacityLeft <= 0) {
+          notificationsConnector.notify(new ServerStreamEvent(EventTypes.BOTTLE_IS_EMPTY, pipe));
+        }
+
         resolve();
       }, this.timeToPour);
     });
