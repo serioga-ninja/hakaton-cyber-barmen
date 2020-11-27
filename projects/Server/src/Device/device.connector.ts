@@ -12,7 +12,7 @@ export class DeviceConnector {
   }
 
   addOrder(id: number) {
-    return this.doRequest(`api/device/order/${id}`, {});
+    return this.doRequest(`api/device/order`, { id });
   }
 
   startPipe(id: number) {

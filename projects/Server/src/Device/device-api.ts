@@ -10,7 +10,7 @@ export class DeviceApi extends Api {
     return [
       {
         cb: this.startOrder,
-        needId: true,
+        needId: false,
         method: 'post',
         url: 'order'
       },
@@ -33,8 +33,8 @@ export class DeviceApi extends Api {
     super({ baseUrl: 'device' });
   }
 
-  startOrder(request: Request<{ id: number; }>, response: Response) {
-    const { id } = request.params;
+  startOrder(request: Request<null, { id: number; }>, response: Response) {
+    const { id } = request.body;
 
     this.orderQueue.add(id);
 
