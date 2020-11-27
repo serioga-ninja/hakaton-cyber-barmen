@@ -4,18 +4,17 @@ import * as express from 'express';
 import * as http from 'http';
 import 'reflect-metadata';
 import { CocktailsModule } from './Cocktails';
+import config from './Core/config';
+import { EventTypes, ServerStreamEvent } from './Notifications/server-stream-events';
 import { TFunc } from './Core/types';
 import { createAllConnections } from './Database/ormconfig';
 import { DrinksModule } from './Drinks';
+import notificationsConnector from './Notifications/notifications.connector';
 import { OrderModule } from './Orders/order.module';
-import { IOptions, ServerStream } from "./Core/server.stream";
 import { PipesModule } from './Pipes/pipes.module';
 
 class Server {
   private express: Application;
-  private eventStreamOptions: IOptions = {
-    retry: 10000
-  };
 
   constructor() {
     this.express = express();
@@ -55,13 +54,12 @@ class Server {
     new CocktailsModule().register(this.express);
     new OrderModule().register(this.express);
     new PipesModule().register(this.express);
-    ServerStream.getInstance(this.express, this.eventStreamOptions);
   }
 
   run(callback: TFunc) {
     http
       .createServer(this.express)
-      .listen(3000, '0.0.0.0', callback);
+      .listen(config.API_PORT, '0.0.0.0', callback);
   }
 }
 
@@ -70,5 +68,8 @@ server.init();
 server.run(async () => {
   await createAllConnections();
 
-  console.log(`Server init done, http://localhost:3000`);
+  console.log(`Server init done, http://localhost:${config.API_PORT}`);
+
+
+  notificationsConnector.notify(new ServerStreamEvent(EventTypes.API_SERSVER_START, { time: new Date().getTime() }));
 })

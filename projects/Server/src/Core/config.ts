@@ -3,6 +3,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
+  API_PORT: parseInt(process.env.API_PORT || '3000'),
+  DEVICE_API_PORT: parseInt(process.env.DEVICE_API_PORT || '3001'),
+  NOTIFICATIONS_API_PORT: parseInt(process.env.NOTIFICATIONS_API_PORT || '3002'),
+
   DEVICE_URL: process.env.DEVICE_URL || 'http://localhost:3001',
 
   DB_PORT: process.env.DB_PORT,

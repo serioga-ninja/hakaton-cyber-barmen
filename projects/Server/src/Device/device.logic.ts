@@ -1,11 +1,11 @@
 import { filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
-import { EventTypes, ServerStreamEvent } from '../Core/server-stream-events';
-import { CustomEventTypes, eventEmitterInstance } from '../Core/server.stream';
+import { EventTypes, ServerStreamEvent } from '../Notifications/server-stream-events';
 import { Component } from '../Database/entities/Component';
 import { Order } from '../Database/entities/Order';
 import { Pipe } from '../Database/entities/Pipe';
 import { dbConnection } from '../Database/ormconfig';
+import notificationsConnector from '../Notifications/notifications.connector';
 import { Device, DeviceState } from './device';
 
 class PipeProcess {
@@ -27,9 +27,8 @@ class PipeProcess {
         this.device.deactivatePipe(pipe);
 
         pipe.capacityLeft -= this.component.amount;
-        await pipeRepo
-          .save(pipe);
-        
+        await pipeRepo.save(pipe);
+
         resolve();
       }, this.timeToPour);
     });
@@ -51,7 +50,8 @@ export class DeviceLogic {
         take(1)
       ).toPromise();
 
-    eventEmitterInstance.emit(CustomEventTypes.SEND_DATA, new ServerStreamEvent(EventTypes.START_NEW_ORDER, order));
+    notificationsConnector.notify(new ServerStreamEvent(EventTypes.START_NEW_ORDER, order));
+
     this.device.state.next(DeviceState.PURRING_DRINKS);
 
     await Promise.all(order.cocktail.components.map((component) => {

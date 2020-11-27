@@ -1,5 +1,6 @@
 export enum EventTypes {
   ORDER_IS_READY = 1,
+  API_SERSVER_START,
   START_NEW_ORDER
 }
 

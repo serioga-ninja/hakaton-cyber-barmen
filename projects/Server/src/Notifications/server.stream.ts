@@ -47,7 +47,7 @@ export class ServerStream {
             eventEmitterInstance.on(CustomEventTypes.END_STREAM, (data: any = 'End Stream') => {
                 response.write('data:' + data + '\n\n');
                 response.end()
-            })
+            });
         })
     }
 }

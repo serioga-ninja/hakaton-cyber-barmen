@@ -1,8 +1,8 @@
 import logger from '../Core/logger';
-import { EventTypes, ServerStreamEvent } from '../Core/server-stream-events';
-import { CustomEventTypes, eventEmitterInstance} from '../Core/server.stream';
+import { EventTypes, ServerStreamEvent } from '../Notifications/server-stream-events';
 import { Order } from '../Database/entities/Order';
 import { dbConnection } from '../Database/ormconfig';
+import notificationsConnector from '../Notifications/notifications.connector';
 import deviceLogic from './device.logic';
 
 export class DeviceOrdersQueue {
@@ -37,7 +37,7 @@ export class DeviceOrdersQueue {
       const order = this.items.shift();
       try {
         await deviceLogic.prepareOrder(order);
-        eventEmitterInstance.emit(CustomEventTypes.SEND_DATA, new ServerStreamEvent(EventTypes.ORDER_IS_READY, order));
+        notificationsConnector.notify(new ServerStreamEvent(EventTypes.ORDER_IS_READY, order));
       } catch (e) {
         logger.error(`Queue error on order: ${JSON.stringify(order)}`);
       }

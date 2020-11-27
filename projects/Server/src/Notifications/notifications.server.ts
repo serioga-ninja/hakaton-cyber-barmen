@@ -4,9 +4,11 @@ import * as express from 'express';
 import * as http from 'http';
 import 'reflect-metadata';
 import config from '../Core/config';
+import { ServerStream } from './server.stream';
 import { TFunc } from '../Core/types';
-import { createAllConnections } from '../Database/ormconfig';
-import { DeviceModule } from './device.module';
+import { NotificationsApi } from './notifications-api';
+
+const port = 3002;
 
 class Server {
   private express: Application;
@@ -26,20 +28,21 @@ class Server {
   }
 
   private register() {
-    new DeviceModule().register(this.express);
+    new NotificationsApi().register(this.express);
+    ServerStream.getInstance(this.express, {
+      retry: 10000
+    });
   }
 
   run(callback: TFunc) {
     http
       .createServer(this.express)
-      .listen(config.DEVICE_API_PORT, '0.0.0.0', callback);
+      .listen(config.NOTIFICATIONS_API_PORT, '0.0.0.0', callback);
   }
 }
 
 const server = new Server();
 server.init();
 server.run(async () => {
-  await createAllConnections();
-
-  console.log(`Server init done, http://localhost:${config.DEVICE_API_PORT}`);
+  console.log(`Server init done, http://localhost:${config.NOTIFICATIONS_API_PORT}`);
 })
