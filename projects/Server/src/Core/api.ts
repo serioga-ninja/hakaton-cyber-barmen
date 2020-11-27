@@ -3,8 +3,16 @@ import { EntityTarget } from 'typeorm/common/EntityTarget';
 import { dbConnection } from '../Database/ormconfig';
 import { ICreateRequest, IGetManyRequest, IGetOneRequest, IResponse, IUpdateRequest } from './interfaces';
 
+export interface IRoute {
+  cb(...args: any[]);
+  needId?: boolean;
+  url: string;
+  method: string;
+}
+
 export interface IApiOptions {
   baseUrl: string;
+  routes?: IRoute[];
 }
 
 const methodWrapper = (method: any, context: Api) => {
@@ -26,6 +34,10 @@ const methodWrapper = (method: any, context: Api) => {
 export abstract class Api<T = any> {
   protected abstract entity?: EntityTarget<T>;
 
+  get routes(): IRoute[] {
+    return [];
+  }
+
   constructor(protected options: IApiOptions) {
   }
 
@@ -34,11 +46,19 @@ export abstract class Api<T = any> {
     const { baseUrl } = this.options;
     const prefix = 'api';
 
-    app.get(`/${prefix}/${baseUrl}`, methodWrapper(this.getMany, this));
-    app.get(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.getOne, this));
-    app.post(`/${prefix}/${baseUrl}`, methodWrapper(this.create, this));
-    app.put(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.update, this));
-    app.delete(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.delete, this));
+    if (this.entity) {
+      app.get(`/${prefix}/${baseUrl}`, methodWrapper(this.getMany, this));
+      app.get(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.getOne, this));
+      app.post(`/${prefix}/${baseUrl}`, methodWrapper(this.create, this));
+      app.put(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.update, this));
+      app.delete(`/${prefix}/${baseUrl}/:id`, methodWrapper(this.delete, this));
+    }
+
+    for (const route of this.routes) {
+      const id = route.needId ? '/:id' : '';
+
+      app[route.method](`/${prefix}/${baseUrl}${id}/${route.url}`, methodWrapper(route.cb, this));
+    }
   }
 
   protected async getOne(request: IGetOneRequest, response: IResponse) {

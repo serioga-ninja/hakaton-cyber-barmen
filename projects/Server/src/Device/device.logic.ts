@@ -64,6 +64,15 @@ export class DeviceLogic {
 
     this.device.state.next(DeviceState.WAITING_FOR_TAKE_GLASS_TAKEN);
   }
+
+
+  startPipe(index: number) {
+    this.device.pipes[index].writeSync(1);
+  }
+
+  stopPipe(index: number) {
+    this.device.pipes[index].writeSync(0);
+  }
 }
 
 const deviceLogic = new DeviceLogic();

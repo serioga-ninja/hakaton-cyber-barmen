@@ -7,12 +7,20 @@ export class DeviceConnector {
   baseUrl = config.DEVICE_URL;
 
   private doRequest<T>(url: string, body: IDictionary): Promise<IResponseData<T>> {
-    return new Request({ url: `${this.baseUrl}/${url}` })
+    return new Request({ url: `${this.baseUrl}/${url}`, json: true })
       .post<T>(body);
   }
 
   addOrder(id: number) {
-    return this.doRequest(`api/order/${id}`, {});
+    return this.doRequest(`api/device/order/${id}`, {});
+  }
+
+  startPipe(id: number) {
+    return this.doRequest(`api/device/start-pipe`, { id });
+  }
+
+  stopPipe(id: number) {
+    return this.doRequest(`api/device/stop-pipe`, { id });
   }
 }
 
