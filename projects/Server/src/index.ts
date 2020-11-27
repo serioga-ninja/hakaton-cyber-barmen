@@ -3,6 +3,7 @@ import { Application } from 'express';
 import * as express from 'express';
 import * as http from 'http';
 import 'reflect-metadata';
+import * as path from 'path';
 import { CocktailsModule } from './Cocktails';
 import config from './Core/config';
 import { EventTypes, ServerStreamEvent } from './Notifications/server-stream-events';
@@ -41,12 +42,7 @@ class Server {
     });
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
-    // this.express.use(session({
-    //   secret: 'uuu',
-    //   store: new MongoStore({
-    //     url: connectionString
-    //   })
-    // }));
+    this.express.use(express.static(config.CLIENT_BUILD_FOLDER()));
   }
 
   private register() {
@@ -54,6 +50,10 @@ class Server {
     new CocktailsModule().register(this.express);
     new OrderModule().register(this.express);
     new PipesModule().register(this.express);
+
+    this.express.get('/', (request, response) => {
+      response.sendFile(path.resolve(config.CLIENT_BUILD_FOLDER(), 'index.html'));
+    });
   }
 
   run(callback: TFunc) {

@@ -1,3 +1,4 @@
+//@ts-ignore
 import { Gpio } from 'onoff';
 import { BehaviorSubject } from 'rxjs';
 import logger from '../Core/logger';

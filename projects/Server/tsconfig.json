@@ -9,7 +9,7 @@
     "allowJs": false,
     "watch": false,
     "rootDir": ".",
-    "outDir": "build",
+    "outDir": "dist",
     "inlineSources": true,
     "moduleResolution": "node",
     "newLine": "lf",

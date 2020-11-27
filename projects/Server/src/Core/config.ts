@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import * as path from 'path';
 
 dotenv.config();
 
@@ -6,6 +7,11 @@ const config = {
   API_PORT: parseInt(process.env.API_PORT || '3000'),
   DEVICE_API_PORT: parseInt(process.env.DEVICE_API_PORT || '3001'),
   NOTIFICATIONS_API_PORT: parseInt(process.env.NOTIFICATIONS_API_PORT || '3002'),
+
+  CLIENT_FOLDER: process.env.CLIENT_FOLDER || path.resolve(process.cwd(), '../../Client'),
+  CLIENT_BUILD_FOLDER() {
+    return path.join(this.CLIENT_FOLDER, 'dist', 'cyber-barmen')
+  },
 
   DEVICE_URL: process.env.DEVICE_URL || 'http://localhost:3001',
 
