@@ -16,13 +16,13 @@ export class DeviceApi extends Api {
       },
       {
         cb: this.startPipe,
-        needId: true,
+        needId: false,
         method: 'post',
         url: 'start-pipe'
       },
       {
         cb: this.stopPipe,
-        needId: true,
+        needId: false,
         method: 'post',
         url: 'stop-pipe'
       },
