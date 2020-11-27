@@ -51,7 +51,7 @@ class Server {
     new OrderModule().register(this.express);
     new PipesModule().register(this.express);
 
-    this.express.get('/', (request, response) => {
+    this.express.get('*', (request, response) => {
       response.sendFile(path.resolve(config.CLIENT_BUILD_FOLDER(), 'index.html'));
     });
   }
