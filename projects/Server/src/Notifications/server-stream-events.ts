@@ -1,6 +1,6 @@
 export enum EventTypes {
   ORDER_IS_READY = 1,
-  API_SERSVER_START,
+  API_SERVER_START,
   START_NEW_ORDER,
   BOTTLE_IS_EMPTY
 }
