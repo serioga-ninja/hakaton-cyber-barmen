@@ -31,7 +31,9 @@ export class SocketService {
 
       eventSource.onmessage = event => {
         this.zone.run(() => {
-          obs.next(event);
+          const data = JSON.parse(event.data);
+
+          obs.next(data);
         })
       }
 
