@@ -1,4 +1,3 @@
-import { interval } from 'rxjs';
 import { filter, take, timeout } from 'rxjs/operators';
 import logger from '../Core/logger';
 import { EventTypes, ServerStreamEvent } from '../Notifications/server-stream-events';

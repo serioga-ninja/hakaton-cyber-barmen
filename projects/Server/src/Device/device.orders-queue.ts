@@ -39,6 +39,7 @@ export class DeviceOrdersQueue {
         await deviceLogic.prepareOrder(order);
         notificationsConnector.notify(new ServerStreamEvent(EventTypes.ORDER_IS_READY, order));
       } catch (e) {
+        logger.error(e);
         logger.error(`Queue error on order: ${JSON.stringify(order)}`);
       }
     }
