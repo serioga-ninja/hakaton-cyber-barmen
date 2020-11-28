@@ -20,7 +20,9 @@ export class ConfigComponent implements OnInit {
       this.items.push(
         {
           drinkId: '',
-          id: i
+          id: i,
+          capacity: 700,
+          capacityLeft: 700,
         });
     }
 
@@ -37,7 +39,10 @@ export class ConfigComponent implements OnInit {
   }
 
   save() {
-    console.log(this.items);
-    this.api.setConfig(this.items);
+    this.items.forEach(el => {
+      el.drink = this.drinks.find(i => i.id === el.drinkId);
+      this.api.setConfig(el).subscribe(data => {
+      });
+    });
   }
 }
