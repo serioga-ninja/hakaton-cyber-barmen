@@ -39,6 +39,7 @@
         <div class="buttons">
           <button *ngIf="isCanUp(c, i)" (click)="up(c, i)">Up</button>
           <button *ngIf="isCanDown(c, i)" (click)="down(c, i)">Down</button>
+          <button class="delete" type="submit" (click)="delete(c, i)">Delete</button>
         </div>
       </div>
     </li>

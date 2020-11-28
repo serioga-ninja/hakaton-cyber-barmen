@@ -99,11 +99,14 @@ export class CocktailComponent implements OnInit {
     this.cocktail.components[i] = this.cocktail.components[i-1];
     this.cocktail.components[i-1] = tmp;
   }
+
   down(c: IComponent, i: number) {
     let tmp = this.cocktail.components[i];
     this.cocktail.components[i] = this.cocktail.components[i+1];
     this.cocktail.components[i+1] = tmp;
   }
 
-
+  delete(c: IComponent, i: number) {
+    this.cocktail.components.splice(i, 1);
+  }
 }

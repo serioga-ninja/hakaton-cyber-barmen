@@ -7,7 +7,6 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 20px;
-  counter-reset: list;
 
   &__item {
     min-width: 350px;
@@ -19,15 +18,21 @@
     cursor: pointer;
     font-size: 20px;
 
-    &::before {
-      counter-increment: list;
-      content: counter(list) '. ';
+    .cocktail-name {
+      display: flex;
+      justify-content: space-between;
     }
 
     ul {
       list-style: none;
       margin-left: 30px;
       font-size: 17px;
+    }
+    .delete mat-icon {
+      width: 20px;
+      height: 20px;
+      font-size: 22px;
+      vertical-align: sub;
     }
   }
 }
