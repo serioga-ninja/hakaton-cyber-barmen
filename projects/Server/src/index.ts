@@ -71,5 +71,5 @@ server.run(async () => {
   console.log(`Server init done, http://localhost:${config.API_PORT}`);
 
 
-  notificationsConnector.notify(new ServerStreamEvent(EventTypes.API_SERSVER_START, { time: new Date().getTime() }));
+  notificationsConnector.notify(new ServerStreamEvent(EventTypes.API_SERVER_START, { time: new Date().getTime() }));
 })
