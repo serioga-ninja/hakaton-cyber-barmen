@@ -11,6 +11,9 @@ export interface ILoginBody {
 export interface IConfigPipe {
   id: number,
   drinkId?: string | number | null,
+  drink?: IDrink,
+  capacity: number,
+  capacityLeft: number,
 }
 
 export interface IDrink {
