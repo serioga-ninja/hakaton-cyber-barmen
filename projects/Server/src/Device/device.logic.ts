@@ -1,5 +1,4 @@
-import { interval } from 'rxjs';
-import { filter, take, timeout } from 'rxjs/operators';
+import { delay, filter, take } from 'rxjs/operators';
 import logger from '../Core/logger';
 import { EventTypes, ServerStreamEvent } from '../Notifications/server-stream-events';
 import { Component } from '../Database/entities/Component';
@@ -30,9 +29,9 @@ class PipeProcess {
         pipe.capacityLeft -= this.component.amount;
         await pipeRepo.save(pipe);
 
-        if (pipe.capacityLeft <= 0) {
-          notificationsConnector.notify(new ServerStreamEvent(EventTypes.BOTTLE_IS_EMPTY, pipe));
-        }
+        // if (pipe.capacityLeft <= 0) {
+        //   notificationsConnector.notify(new ServerStreamEvent(EventTypes.BOTTLE_IS_EMPTY, pipe));
+        // }
 
         resolve();
       }, this.timeToPour);
@@ -53,7 +52,7 @@ export class DeviceLogic {
       .pipe(
         filter((state) => state === DeviceState.WAITING_FOR_ORDER),
         take(1),
-        timeout(2000)
+        delay(2000)
       ).toPromise();
 
     notificationsConnector.notify(new ServerStreamEvent(EventTypes.START_NEW_ORDER, order));

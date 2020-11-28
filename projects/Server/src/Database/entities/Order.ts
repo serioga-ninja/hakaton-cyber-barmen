@@ -32,7 +32,7 @@ export class Order {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Cocktail, cocktail => cocktail.orders)
+  @ManyToOne(() => Cocktail, cocktail => cocktail.orders, {cascade: true, onDelete: 'CASCADE'})
   @JoinTable()
   cocktail: Cocktail;
 }

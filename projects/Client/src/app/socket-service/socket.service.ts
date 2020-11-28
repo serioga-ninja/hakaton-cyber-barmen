@@ -2,15 +2,15 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
+import { environment } from "../../environments/environment";
 
+const baseStreamAPI = environment.baseStreamAPI ? environment.baseStreamAPI : 'http://localhost:3002/stream/';
 
 @Injectable({
   providedIn:'root'
 })
 export class SocketService {
-  private readonly URL = 'http://localhost:3002/stream';
-
-  constructor(private zone: NgZone, private toastr: ToastrService) {
+    constructor(private zone: NgZone, private toastr: ToastrService) {
 
   }
 
@@ -20,7 +20,7 @@ export class SocketService {
 
   getServerSentEvents() {
     return new Observable(obs => {
-      const eventSource = this.getEventSource(this.URL);
+      const eventSource = this.getEventSource(baseStreamAPI);
 
       eventSource.onopen = event => {
         this.zone.run(() => {
@@ -31,7 +31,9 @@ export class SocketService {
 
       eventSource.onmessage = event => {
         this.zone.run(() => {
-          obs.next(event);
+          const data = JSON.parse(event.data);
+
+          obs.next(data);
         })
       }
 

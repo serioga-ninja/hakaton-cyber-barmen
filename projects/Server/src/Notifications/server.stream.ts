@@ -41,7 +41,7 @@ export class ServerStream {
             response.flushHeaders();
 
             eventEmitterInstance.on(CustomEventTypes.SEND_DATA, (data: ServerStreamEvent) => {
-                response.write('data: ' + data + '\n\n')
+                response.write('data: ' + JSON.stringify(data) + '\n\n')
             });
 
             eventEmitterInstance.on(CustomEventTypes.END_STREAM, (data: any = 'End Stream') => {

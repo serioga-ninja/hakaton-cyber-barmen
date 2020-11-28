@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from "./socket-service/socket.service";
-import { EventNotifications, IEventStream } from "./models";
+import { EventNotifications, EventTypes, IEventStream } from "./models";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -19,6 +19,11 @@ export class AppComponent implements OnInit{
     this.socket.getServerSentEvents()
       .subscribe((data: IEventStream) => {
         if (data.eventType) {
+          if (data.eventType == EventTypes.BOTTLE_IS_EMPTY) {
+            this.toastrService.warning(EventNotifications[data.eventType])
+            return;
+          }
+
           this.toastrService.success(EventNotifications[data.eventType])
         }
       }
