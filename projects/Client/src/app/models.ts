@@ -47,9 +47,9 @@ export enum EventTypes {
 }
 
 export const EventNotifications = {
-  [EventTypes.ORDER_IS_READY]: 'Order is Ready',
+  [EventTypes.ORDER_IS_READY]: 'Your order is ready!',
   [EventTypes.API_SERVER_START]: 'Session is started',
-  [EventTypes.START_NEW_ORDER]: 'Your order has started',
-  [EventTypes.BOTTLE_IS_EMPTY]: 'Bottle is empty',
+  [EventTypes.START_NEW_ORDER]: 'Preparing your cocktail.',
+  [EventTypes.BOTTLE_IS_EMPTY]: 'Bottle is empty!',
 };
 
