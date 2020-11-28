@@ -19,7 +19,7 @@ export class Device {
 
   constructor() {
     this.activePipes = [];
-    this.state = new BehaviorSubject<DeviceState>(DeviceState.WAITING_FOR_ORDER);
+    this.state = new BehaviorSubject<DeviceState>(DeviceState.WAITING_FOR_GLASS);
     this.pipes = [
       null,
       new Gpio(17, 'out'), //use GPIO pin 4 as output
@@ -31,18 +31,24 @@ export class Device {
     ];
     this.glassHolder = new Gpio(26, 'in', 'both');
 
+    const glassPresent = this.glassHolder.readSync() === 1;
+    if (glassPresent) {
+      this.state.next(DeviceState.WAITING_FOR_ORDER);
+    }
 
-    this.glassHolder.watch((err, value) => {
+    this.glassHolder.watch((err, value: 1 | 0) => {
       if (err) {
         logger.error(err);
 
         return;
       }
+      this.deactivateAllPipes();
+      const state = this.state.getValue();
 
-      if (this.state.getValue() === DeviceState.WAITING_FOR_TAKE_GLASS_TAKEN) {
+      if (value === 0) {
+        this.deactivateAllPipes();
         this.state.next(DeviceState.WAITING_FOR_GLASS);
-      } else {
-        // this.deactivateAllPipes();
+      } else if (state === DeviceState.WAITING_FOR_GLASS && value === 1) {
         this.state.next(DeviceState.WAITING_FOR_ORDER);
       }
     });

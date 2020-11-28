@@ -1,4 +1,5 @@
-import { filter, take } from 'rxjs/operators';
+import { interval } from 'rxjs';
+import { filter, take, timeout } from 'rxjs/operators';
 import logger from '../Core/logger';
 import { EventTypes, ServerStreamEvent } from '../Notifications/server-stream-events';
 import { Component } from '../Database/entities/Component';
@@ -51,7 +52,8 @@ export class DeviceLogic {
     await this.device.state
       .pipe(
         filter((state) => state === DeviceState.WAITING_FOR_ORDER),
-        take(1)
+        take(1),
+        timeout(2000)
       ).toPromise();
 
     notificationsConnector.notify(new ServerStreamEvent(EventTypes.START_NEW_ORDER, order));
