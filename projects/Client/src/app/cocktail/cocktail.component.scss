@@ -16,6 +16,13 @@
   button {
     margin: 0 15px 15px;
   }
+
+  .delete mat-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 22px;
+    vertical-align: sub;
+  }
 }
 
 @media (min-width: 720px) {

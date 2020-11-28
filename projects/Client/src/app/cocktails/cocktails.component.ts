@@ -50,4 +50,11 @@ export class CocktailsComponent implements OnInit {
     event.stopImmediatePropagation();
     this.router.navigate([`../cocktail`, item.id],   {relativeTo: this.route});
   }
+
+  deleteCocktail(event: MouseEvent, item: ICocktail) {
+    event.stopImmediatePropagation();
+    this.api.deleteCocktail(item).subscribe(el => {
+      this.toast.success(`Cocktail ${item.name} successfully deleted`)
+    });
+  }
 }
