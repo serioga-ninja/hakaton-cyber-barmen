@@ -9,7 +9,7 @@ const sqliteConnectionOptions: SqliteConnectionOptions = {
   'name': 'default',
   'type': 'sqlite',
   database: path.join(__dirname, `db.sqlite3`),
-  'synchronize': false,
+  'synchronize': true,
   entities: [path.join(__dirname, `entities/*{.ts,.js}`)],
   'migrations': [path.join(__dirname, `migrations/*{.ts,.js}`)],
   'subscribers': [path.join(__dirname, `subscribers/*{.ts,.js}`)],
@@ -29,7 +29,7 @@ const pgConnectionOptions: PostgresConnectionOptions = {
   password: config.DB_PASSWORD,
   database: config.DB_NAME,
 
-  'synchronize': false,
+  'synchronize': true,
   entities: [path.join(__dirname, `entities/*{.ts,.js}`)],
   'migrations': [path.join(__dirname, `migrations/*{.ts,.js}`)],
   'subscribers': [path.join(__dirname, `subscribers/*{.ts,.js}`)],
