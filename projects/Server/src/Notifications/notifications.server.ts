@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as http from 'http';
 import 'reflect-metadata';
 import config from '../Core/config';
-import { ServerStream } from './server.stream';
+import { CustomEventTypes, eventEmitterInstance, ServerStream } from './server.stream';
 import { TFunc } from '../Core/types';
 import { NotificationsApi } from './notifications-api';
 
@@ -38,6 +38,10 @@ class Server {
     http
       .createServer(this.express)
       .listen(config.NOTIFICATIONS_API_PORT, '0.0.0.0', callback);
+
+    setInterval(() => {
+      eventEmitterInstance.emit(CustomEventTypes.SEND_DATA, {eventType: null, payload: {msg: 'ping'}})
+    }, 30000)
   }
 }
 

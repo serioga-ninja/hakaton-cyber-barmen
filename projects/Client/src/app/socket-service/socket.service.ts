@@ -1,15 +1,16 @@
 
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 
 @Injectable({
   providedIn:'root'
 })
 export class SocketService {
-  private readonly URL = 'http://localhost:3000/stream';
+  private readonly URL = 'http://localhost:3002/stream';
 
-  constructor(private zone: NgZone) {
+  constructor(private zone: NgZone, private toastr: ToastrService) {
 
   }
 
@@ -23,7 +24,7 @@ export class SocketService {
 
       eventSource.onopen = event => {
         this.zone.run(() => {
-          console.log('SSE is running');
+          this.toastr.success('Server stream is running');
           obs.next(event);
         })
       }
@@ -36,7 +37,7 @@ export class SocketService {
 
       eventSource.onerror = event => {
         this.zone.run(() => {
-          console.log('SSE error: ', event);
+          this.toastr.error('Server stream error');
           obs.next(event)
         })
       }

@@ -7,6 +7,7 @@
     "build": "tsc",
     "start": "node -r ts-node/register ./src/index.ts",
     "start:device-api": "node -r ts-node/register ./src/Device/device.server.ts",
+    "start:sse": "node -r ts-node/register ./src/Notifications/notifications.server.ts",
     "reset:db": "rm ./src/Database/db.sqlite3 && node -r ts-node/register ./src/Database/seeds/default-data.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
