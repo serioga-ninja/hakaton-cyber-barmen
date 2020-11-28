@@ -15,7 +15,7 @@ export class Pipe {
   @Column({ default: 500 }) // ml
   capacityLeft: number;
 
-  @ManyToOne(() => Drink)
+  @ManyToOne(() => Drink, { cascade: true })
   @JoinTable()
   drink: Drink;
 }

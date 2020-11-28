@@ -22,6 +22,7 @@ export class CocktailsApi extends Api {
 
     response.json(res);
   }
+
   protected async getOne(request: IGetOneRequest, response: IResponse) {
     const id = request.params.id;
     const res = await dbConnection
