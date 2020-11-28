@@ -8,7 +8,7 @@ const baseAPI = environment.baseAPI ? environment.baseAPI : 'http://localhost:30
 
 const apiUrls = {
   login: '',
-  config: `${baseAPI}config`,
+  config: `${baseAPI}pipes`,
   cocktails: `${baseAPI}cocktails`,
   drinks: `${baseAPI}drinks`,
   cookCocktail: `${baseAPI}orders`,
@@ -37,8 +37,8 @@ export class ApiService {
   getConfig() {
     return this.httpClient.get<IConfigPipe[]>(apiUrls.config);
   }
-  setConfig(body: IConfigPipe[]) {
-    return this.httpClient.put<IConfigPipe[]>(apiUrls.config, body);
+  setConfig(body: IConfigPipe) {
+    return this.httpClient.put<IConfigPipe[]>(apiUrls.config + '/' + body.id, body);
   }
 
   getCocktails(): Observable<ICocktail[]> {

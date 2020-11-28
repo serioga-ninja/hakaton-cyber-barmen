@@ -7,13 +7,27 @@
   </div>
 
   <ul class="list">
-    <li  class="list__item" *ngFor="let item of items; index as i;">
-      <mat-label>Pipe {{1+i}}</mat-label>
-      <mat-select [(value)]="item.drinkId">
-        <mat-option *ngFor="let option of drinks" [value]="option.id">
-          {{option.name}}
-        </mat-option>
-      </mat-select>
+    <li class="list__item" *ngFor="let item of items; index as i;">
+      <div class="col">
+        <mat-label>Pipe {{1+i}}</mat-label>
+        <mat-select [(value)]="item.drinkId">
+          <mat-option *ngFor="let option of drinks" [value]="option.id">
+            {{option.name}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Capacity</mat-label>
+          <input matInput type="text" disabled [(ngModel)]="item.capacity">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Capacity Left</mat-label>
+          <input matInput type="text" disabled [(ngModel)]="item.capacityLeft">
+        </mat-form-field>
+      </div>
     </li>
   </ul>
 </div>
