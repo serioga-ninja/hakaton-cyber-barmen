@@ -9,7 +9,7 @@
   <ul class="list">
     <li class="list__item" *ngFor="let item of items; index as i;">
       <div class="col">
-        <mat-label>Pipe {{1+i}}</mat-label>
+        <mat-label>Pipe {{item.id}}</mat-label>
         <mat-select [(value)]="item.drinkId">
           <mat-option *ngFor="let option of drinks" [value]="option.id">
             {{option.name}}
